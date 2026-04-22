@@ -1,106 +1,81 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  color-scheme: light;
+  color-scheme:light;
   --y:#F5B731;--bl:#3B9BD5;--g:#2EA84F;--br:#8B5E3C;
   --f:#E6007E;--t:#3DBDB3;--r:#E63A2E;--p:#6B4C9E;--s:#F0A090;
-  --px:clamp(16px,5vw,48px);
-  --sv:clamp(64px,10vw,120px);
+  --px:clamp(20px,5vw,48px);
+  --sv:clamp(48px,8vw,100px);
   --color-background-primary:#ffffff;
   --color-background-secondary:#f9f9f9;
   --color-text-primary:#1a1a1a;
   --color-text-secondary:#888888;
   --color-border-tertiary:rgba(0,0,0,0.08);
-  --color-border-secondary:rgba(0,0,0,0.15);
   --font-sans:system-ui,-apple-system,sans-serif;
   --font-serif:Georgia,serif;
   --border-radius-md:8px;
   --border-radius-lg:12px;
 }
-html{background:#ffffff;color:#1a1a1a}
-body{font-family:var(--font-sans);background:var(--color-background-primary);overflow-x:hidden}
-.fade{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+html,body{background:#fff;color:#1a1a1a;font-family:var(--font-sans);overflow-x:hidden}
+
+.fade{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
 .fade.vis{opacity:1;transform:none}
 .fade-d1{transition-delay:.1s}.fade-d2{transition-delay:.2s}.fade-d3{transition-delay:.3s}
-.strip{display:flex;height:5px;width:100%}
+
+.strip{display:flex;height:6px;width:100%}
 .strip>div{flex:1}
 
-nav{background:var(--color-background-primary);border-bottom:.5px solid var(--color-border-tertiary);padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;height:52px}
-.nav-m{color:var(--f);font-weight:500;font-size:11px;letter-spacing:3px;text-transform:uppercase}
-.nav-x{color:var(--color-text-secondary);font-size:11px;margin:0 6px}
-.nav-o{color:var(--br);font-style:italic;font-family:var(--font-serif);font-size:16px}
-.nav-date{font-size:10px;font-weight:500;letter-spacing:1.5px;color:var(--color-text-secondary);text-transform:uppercase;white-space:nowrap}
+nav{background:#fff;border-bottom:.5px solid rgba(0,0,0,0.08);padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logos{display:flex;align-items:center;gap:10px}
+.nav-logos img{height:36px;width:auto;display:block}
+.nav-x{color:#aaa;font-size:13px}
+.nav-right img{height:36px;width:auto;display:block}
 
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(32px,6vw,80px) var(--px) clamp(40px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(36px,6vw,80px) var(--px) clamp(40px,6vw,80px);text-align:center;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.13}
 .orb1{width:clamp(200px,50vw,500px);height:clamp(200px,50vw,500px);background:var(--bl);top:-80px;left:-100px}
 .orb2{width:clamp(160px,40vw,400px);height:clamp(160px,40vw,400px);background:var(--f);bottom:-60px;right:-80px}
 .orb3{width:clamp(120px,30vw,300px);height:clamp(120px,30vw,300px);background:var(--y);top:40%;left:55%}
-.hero-tag{font-size:clamp(9px,2vw,11px);font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:clamp(16px,4vw,28px)}
-.hero-jazz{font-size:clamp(76px,22vw,180px);font-weight:500;line-height:.85;margin-bottom:6px}
-.hero-jazz .j{color:var(--bl)}.hero-jazz .a{color:var(--r)}.hero-jazz .z1{color:var(--t)}.hero-jazz .z2{color:var(--p)}
-.hero-day{font-size:clamp(14px,4vw,44px);font-weight:500;letter-spacing:clamp(6px,2vw,12px);text-transform:uppercase;color:var(--color-text-primary);margin-bottom:clamp(20px,4vw,32px)}
-.hero-title{font-size:clamp(14px,3vw,26px);font-style:italic;font-family:var(--font-serif);color:var(--r);letter-spacing:1px;margin-bottom:clamp(36px,6vw,60px)}
 
-.keys{display:flex;align-items:flex-end;justify-content:center;gap:clamp(2px,.5vw,4px);height:clamp(36px,8vw,60px);margin-bottom:clamp(36px,6vw,64px)}
-.wk{width:clamp(13px,3vw,22px);border-radius:2px 2px 0 0;transition:transform .2s}
-.wk:hover{transform:scaleY(1.1);transform-origin:top}
-.bk{width:clamp(8px,2vw,14px);height:55%;background:#1a1a1a;border-radius:1px 1px 0 0}
-
-.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:500px}
-.pill{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:999px;padding:9px clamp(14px,3vw,22px);font-size:clamp(11px,2vw,13px);font-weight:500;color:var(--color-text-primary)}
-.pill span{color:var(--color-text-secondary);font-weight:400;margin-right:5px;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.hero-title{font-size:clamp(18px,4vw,28px);font-style:italic;font-family:var(--font-serif);color:var(--r);letter-spacing:1px;margin-bottom:clamp(28px,5vw,48px)}
 
 .about{padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto}
-.section-tag{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:20px}
-.about-quote{font-size:clamp(18px,4vw,36px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:var(--color-text-primary);line-height:1.25;margin-bottom:36px}
+.section-tag{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#aaa;margin-bottom:20px}
+.about-quote{font-size:clamp(20px,4vw,36px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:#1a1a1a;line-height:1.25;margin-bottom:32px}
 .about-quote em{color:var(--f);font-style:normal}
-.about-body p{font-size:clamp(15px,2vw,17px);line-height:1.9;color:var(--color-text-secondary);margin-bottom:18px}
-.about-body strong{font-weight:500;color:var(--color-text-primary)}
-.divider{width:48px;height:3px;border-radius:2px;margin:clamp(32px,5vw,48px) 0;background:linear-gradient(90deg,var(--f),var(--bl))}
+.about-body p{font-size:clamp(16px,2vw,18px);line-height:1.9;color:#666;margin-bottom:18px}
+.about-body strong{font-weight:500;color:#1a1a1a}
+.divider{width:48px;height:3px;border-radius:2px;margin:clamp(28px,5vw,48px) 0;background:linear-gradient(90deg,var(--f),var(--bl))}
 
 .prog{padding:0 0 var(--sv)}
-.prog-head{padding:0 var(--px) clamp(32px,5vw,64px);max-width:min(720px,100%);margin:0 auto}
-.prog-head h2{font-size:clamp(24px,6vw,52px);font-weight:500;color:var(--color-text-primary);margin-top:10px}
+.prog-head{padding:0 var(--px) clamp(24px,4vw,56px);max-width:min(720px,100%);margin:0 auto}
+.prog-head h2{font-size:clamp(28px,6vw,52px);font-weight:500;color:#1a1a1a;margin-top:10px}
 .chapters{max-width:min(720px,100%);margin:0 auto}
-.chapter{border-top:.5px solid var(--color-border-tertiary)}
-.chapter:last-child{border-bottom:.5px solid var(--color-border-tertiary)}
-.ch-btn{display:flex;align-items:center;gap:clamp(12px,3vw,24px);padding:clamp(18px,3vw,28px) var(--px);width:100%;text-align:left;background:none;border:none;cursor:pointer;transition:background .2s}
-.ch-btn:hover{background:var(--color-background-secondary)}
-.ch-num{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--color-text-secondary);min-width:22px;text-transform:uppercase}
-.ch-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.chapter{border-top:.5px solid rgba(0,0,0,0.08)}
+.chapter:last-child{border-bottom:.5px solid rgba(0,0,0,0.08)}
+.ch-btn{display:flex;align-items:center;gap:clamp(14px,3vw,24px);padding:clamp(20px,3vw,28px) var(--px);width:100%;text-align:left;background:none;border:none;cursor:pointer;transition:background .2s}
+.ch-btn:hover{background:#f9f9f9}
+.ch-num{font-size:11px;font-weight:500;letter-spacing:2px;color:#aaa;min-width:24px;text-transform:uppercase}
+.ch-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .ch-info{flex:1;min-width:0}
-.ch-name{font-size:clamp(15px,3vw,19px);font-weight:500;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ch-sub{font-size:12px;color:var(--color-text-secondary);font-style:italic;margin-top:4px}
-.ch-icon{font-size:12px;color:var(--color-text-secondary);transition:transform .3s ease;flex-shrink:0}
+.ch-name{font-size:clamp(17px,3vw,20px);font-weight:500;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-sub{font-size:13px;color:#aaa;font-style:italic;margin-top:5px}
+.ch-icon{font-size:13px;color:#aaa;transition:transform .3s ease;flex-shrink:0}
 .chapter.open .ch-icon{transform:rotate(180deg)}
 .ch-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
-.chapter.open .ch-body{max-height:320px}
-.songs{list-style:none;padding:0 var(--px) 28px clamp(48px,10vw,88px)}
-.song{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.chapter.open .ch-body{max-height:360px}
+.songs{list-style:none;padding:0 var(--px) 28px clamp(52px,10vw,90px)}
+.song{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:.5px solid rgba(0,0,0,0.06)}
 .song:last-child{border-bottom:none}
-.song-bar{width:3px;height:28px;border-radius:2px;flex-shrink:0}
-.song-name{font-size:clamp(11px,2vw,13px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-text-primary)}
+.song-bar{width:3px;height:30px;border-radius:2px;flex-shrink:0}
+.song-name{font-size:clamp(13px,2vw,15px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#1a1a1a}
 
-.info{padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto}
-.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:1px;background:var(--color-border-tertiary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-top:36px}
-.icard{background:var(--color-background-primary);padding:clamp(20px,4vw,32px) clamp(18px,4vw,28px)}
-.icard-lbl{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:14px}
-.icard-val{font-size:clamp(17px,3vw,20px);font-weight:500;color:var(--color-text-primary);line-height:1.4;margin-bottom:6px}
-.icard-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
-
-footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:.5px solid var(--color-border-tertiary)}
-.footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
-.footer-m{color:var(--f);font-weight:500;font-size:12px;letter-spacing:3px;text-transform:uppercase}
-.footer-x{color:var(--color-text-secondary);font-size:11px}
-.footer-o{color:var(--br);font-style:italic;font-family:var(--font-serif);font-size:17px}
-.footer-copy{font-size:11px;color:var(--color-text-secondary);letter-spacing:1px}
-
-@media(max-width:420px){
-  .nav-date{display:none}
-  .ch-sub{display:none}
-}
+footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:.5px solid rgba(0,0,0,0.08)}
+.footer-logos{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
+.footer-logos img{height:32px;width:auto;display:block}
+.footer-x{color:#aaa;font-size:12px}
+.footer-copy{font-size:12px;color:#aaa;letter-spacing:1px}
 </style>
 
 <div class="strip">
@@ -110,23 +85,25 @@ footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:
 </div>
 
 <nav>
-  <div style="display:flex;align-items:center">
-    <img src="logo-musicart.png" alt="MusicArt" style="height:28px;width:auto;display:block">
+  <div class="nav-logos">
+    <img src="logo-musicart.png" alt="MusicArt">
     <span class="nav-x">×</span>
-    <img src="logo_onda.png" alt="onda" style="height:28px;width:auto;display:block">
+    <img src="logo_onda.png" alt="Onda">
   </div>
-  <img src="logo_IJD.png" alt="International Jazz Day" style="height:36px;width:auto;display:block">
+  <div class="nav-right">
+    <img src="logo_IJD.png" alt="International Jazz Day">
+  </div>
 </nav>
 
 <div class="hero">
   <div class="hero-bg">
     <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
   </div>
-  <img src="copertina.png" alt="International Jazz Day" class="fade" style="width:min(520px,90%);height:auto;margin-bottom:clamp(20px,4vw,32px)">
+  <img src="copertina.png" alt="International Jazz Day" class="fade" style="width:min(480px,88%);height:auto;margin-bottom:clamp(16px,4vw,28px)">
   <div class="hero-title fade fade-d1">When You Fall in Love</div>
-  <div class="fade fade-d3" style="text-align:center;line-height:2">
-<div style="font-size:clamp(14px,2.5vw,18px);font-weight:500;color:#1a1a1a">30 Aprile &nbsp;·&nbsp; ore 21:30 &nbsp;·&nbsp; Spazio Onda</div>
-    <div style="font-size:clamp(12px,2vw,15px);color:#aaa;margin-top:4px">Via Vittorio Alfieri, 34 · San Benedetto del Tronto</div>
+  <div class="fade fade-d2" style="text-align:center;line-height:2">
+    <div style="font-size:clamp(15px,2.5vw,18px);font-weight:500;color:#1a1a1a">30 Aprile &nbsp;·&nbsp; ore 21:30 &nbsp;·&nbsp; Spazio Onda</div>
+    <div style="font-size:clamp(13px,2vw,15px);color:#aaa;margin-top:4px">Via Vittorio Alfieri, 34 · San Benedetto del Tronto</div>
   </div>
 </div>
 
@@ -223,25 +200,25 @@ footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:
 
 <div style="padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto;text-align:center" class="fade">
   <div class="section-tag" style="margin-bottom:24px">Una serata speciale</div>
-  <div style="font-size:clamp(36px,10vw,80px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:#1a1a1a;line-height:1.1;margin-bottom:20px">Grazie a tutti.</div>
-  <div style="font-size:clamp(14px,2vw,18px);color:#888;font-style:italic;font-family:var(--font-serif);line-height:1.8">Perché senza di voi,<br>la musica sarebbe solo silenzio.</div>
+  <div style="font-size:clamp(40px,10vw,80px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:#1a1a1a;line-height:1.1;margin-bottom:20px">Grazie a tutti.</div>
+  <div style="font-size:clamp(15px,2vw,18px);color:#aaa;font-style:italic;font-family:var(--font-serif);line-height:1.8">Perché senza di voi,<br>la musica sarebbe solo silenzio.</div>
 </div>
 
 <div style="padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto">
   <div class="section-tag fade" style="text-align:center;margin-bottom:36px">Seguici</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-border-tertiary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden" class="fade">
-    <a href="https://www.instagram.com/musicart_sbt/" target="_blank" style="background:#fff;padding:32px 24px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;transition:background .2s" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E6007E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#E6007E" stroke="none"/></svg>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(0,0,0,0.08);border:.5px solid rgba(0,0,0,0.08);border-radius:var(--border-radius-lg);overflow:hidden" class="fade">
+    <a href="https://www.instagram.com/musicart_sbt/" target="_blank" style="background:#fff;padding:32px 20px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E6007E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#E6007E" stroke="none"/></svg>
       <div style="text-align:center">
-        <div style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:6px">MusicArt</div>
-        <div style="font-size:14px;font-weight:500;color:#1a1a1a">@musicart_sbt</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">MusicArt</div>
+        <div style="font-size:15px;font-weight:500;color:#1a1a1a">@musicart_sbt</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/spazio_onda/" target="_blank" style="background:#fff;padding:32px 24px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;transition:background .2s" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#8B5E3C" stroke="none"/></svg>
+    <a href="https://www.instagram.com/spazio_onda/" target="_blank" style="background:#fff;padding:32px 20px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#8B5E3C" stroke="none"/></svg>
       <div style="text-align:center">
-        <div style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:6px">Spazio Onda</div>
-        <div style="font-size:14px;font-weight:500;color:#1a1a1a">@spazio_onda</div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">Spazio Onda</div>
+        <div style="font-size:15px;font-weight:500;color:#1a1a1a">@spazio_onda</div>
       </div>
     </a>
   </div>
@@ -254,21 +231,26 @@ footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:
 </div>
 
 <footer>
-  <div class="footer-brand">
-    <img src="logo-musicart.png" alt="MusicArt" style="height:32px;width:auto;display:block">
+  <div class="footer-logos">
+    <img src="logo-musicart.png" alt="MusicArt">
     <span class="footer-x">×</span>
-    <img src="logo_onda.png" alt="onda" style="height:32px;width:auto;display:block">
+    <img src="logo_onda.png" alt="Onda">
   </div>
   <div class="footer-copy">International Jazz Day 2026 — When You Fall in Love</div>
 </footer>
 
 <script>
+if(!document.querySelector('meta[name="viewport"]')){
+  const m=document.createElement('meta');
+  m.name='viewport';m.content='width=device-width,initial-scale=1';
+  document.head.appendChild(m);
+}
 function tog(id){
   const el=document.getElementById(id);
   const was=el.classList.contains('open');
   document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('open'));
   if(!was)el.classList.add('open');
 }
-const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}})},{threshold:.12});
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 </script>
