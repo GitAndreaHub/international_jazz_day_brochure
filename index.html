@@ -1,0 +1,271 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --y:#F5B731;--bl:#3B9BD5;--g:#2EA84F;--br:#8B5E3C;
+  --f:#E6007E;--t:#3DBDB3;--r:#E63A2E;--p:#6B4C9E;--s:#F0A090;
+  --px:clamp(16px,5vw,48px);
+  --sv:clamp(64px,10vw,120px);
+}
+body{font-family:var(--font-sans);background:var(--color-background-primary);overflow-x:hidden}
+.fade{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.fade.vis{opacity:1;transform:none}
+.fade-d1{transition-delay:.1s}.fade-d2{transition-delay:.2s}.fade-d3{transition-delay:.3s}
+.strip{display:flex;height:5px;width:100%}
+.strip>div{flex:1}
+
+nav{background:var(--color-background-primary);border-bottom:.5px solid var(--color-border-tertiary);padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-m{color:var(--f);font-weight:500;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.nav-x{color:var(--color-text-secondary);font-size:11px;margin:0 6px}
+.nav-o{color:var(--br);font-style:italic;font-family:var(--font-serif);font-size:16px}
+.nav-date{font-size:10px;font-weight:500;letter-spacing:1.5px;color:var(--color-text-secondary);text-transform:uppercase;white-space:nowrap}
+
+.hero{min-height:90svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(48px,10vw,100px) var(--px) clamp(64px,10vw,100px);text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.13}
+.orb1{width:clamp(200px,50vw,500px);height:clamp(200px,50vw,500px);background:var(--bl);top:-80px;left:-100px}
+.orb2{width:clamp(160px,40vw,400px);height:clamp(160px,40vw,400px);background:var(--f);bottom:-60px;right:-80px}
+.orb3{width:clamp(120px,30vw,300px);height:clamp(120px,30vw,300px);background:var(--y);top:40%;left:55%}
+.hero-tag{font-size:clamp(9px,2vw,11px);font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:clamp(16px,4vw,28px)}
+.hero-jazz{font-size:clamp(76px,22vw,180px);font-weight:500;line-height:.85;margin-bottom:6px}
+.hero-jazz .j{color:var(--bl)}.hero-jazz .a{color:var(--r)}.hero-jazz .z1{color:var(--t)}.hero-jazz .z2{color:var(--p)}
+.hero-day{font-size:clamp(14px,4vw,44px);font-weight:500;letter-spacing:clamp(6px,2vw,12px);text-transform:uppercase;color:var(--color-text-primary);margin-bottom:clamp(20px,4vw,32px)}
+.hero-title{font-size:clamp(14px,3vw,26px);font-style:italic;font-family:var(--font-serif);color:var(--r);letter-spacing:1px;margin-bottom:clamp(36px,6vw,60px)}
+
+.keys{display:flex;align-items:flex-end;justify-content:center;gap:clamp(2px,.5vw,4px);height:clamp(36px,8vw,60px);margin-bottom:clamp(36px,6vw,64px)}
+.wk{width:clamp(13px,3vw,22px);border-radius:2px 2px 0 0;transition:transform .2s}
+.wk:hover{transform:scaleY(1.1);transform-origin:top}
+.bk{width:clamp(8px,2vw,14px);height:55%;background:#1a1a1a;border-radius:1px 1px 0 0}
+
+.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:500px}
+.pill{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:999px;padding:9px clamp(14px,3vw,22px);font-size:clamp(11px,2vw,13px);font-weight:500;color:var(--color-text-primary)}
+.pill span{color:var(--color-text-secondary);font-weight:400;margin-right:5px;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+
+.about{padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto}
+.section-tag{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:20px}
+.about-quote{font-size:clamp(18px,4vw,36px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:var(--color-text-primary);line-height:1.25;margin-bottom:36px}
+.about-quote em{color:var(--f);font-style:normal}
+.about-body p{font-size:clamp(15px,2vw,17px);line-height:1.9;color:var(--color-text-secondary);margin-bottom:18px}
+.about-body strong{font-weight:500;color:var(--color-text-primary)}
+.divider{width:48px;height:3px;border-radius:2px;margin:clamp(32px,5vw,48px) 0;background:linear-gradient(90deg,var(--f),var(--bl))}
+
+.prog{padding:0 0 var(--sv)}
+.prog-head{padding:0 var(--px) clamp(32px,5vw,64px);max-width:min(720px,100%);margin:0 auto}
+.prog-head h2{font-size:clamp(24px,6vw,52px);font-weight:500;color:var(--color-text-primary);margin-top:10px}
+.chapters{max-width:min(720px,100%);margin:0 auto}
+.chapter{border-top:.5px solid var(--color-border-tertiary)}
+.chapter:last-child{border-bottom:.5px solid var(--color-border-tertiary)}
+.ch-btn{display:flex;align-items:center;gap:clamp(12px,3vw,24px);padding:clamp(18px,3vw,28px) var(--px);width:100%;text-align:left;background:none;border:none;cursor:pointer;transition:background .2s}
+.ch-btn:hover{background:var(--color-background-secondary)}
+.ch-num{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--color-text-secondary);min-width:22px;text-transform:uppercase}
+.ch-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.ch-info{flex:1;min-width:0}
+.ch-name{font-size:clamp(15px,3vw,19px);font-weight:500;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-sub{font-size:12px;color:var(--color-text-secondary);font-style:italic;margin-top:4px}
+.ch-icon{font-size:12px;color:var(--color-text-secondary);transition:transform .3s ease;flex-shrink:0}
+.chapter.open .ch-icon{transform:rotate(180deg)}
+.ch-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.chapter.open .ch-body{max-height:320px}
+.songs{list-style:none;padding:0 var(--px) 28px clamp(48px,10vw,88px)}
+.song{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.song:last-child{border-bottom:none}
+.song-bar{width:3px;height:28px;border-radius:2px;flex-shrink:0}
+.song-name{font-size:clamp(11px,2vw,13px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-text-primary)}
+
+.info{padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:1px;background:var(--color-border-tertiary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-top:36px}
+.icard{background:var(--color-background-primary);padding:clamp(20px,4vw,32px) clamp(18px,4vw,28px)}
+.icard-lbl{font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:14px}
+.icard-val{font-size:clamp(17px,3vw,20px);font-weight:500;color:var(--color-text-primary);line-height:1.4;margin-bottom:6px}
+.icard-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+
+footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:.5px solid var(--color-border-tertiary)}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.footer-m{color:var(--f);font-weight:500;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+.footer-x{color:var(--color-text-secondary);font-size:11px}
+.footer-o{color:var(--br);font-style:italic;font-family:var(--font-serif);font-size:17px}
+.footer-copy{font-size:11px;color:var(--color-text-secondary);letter-spacing:1px}
+
+@media(max-width:420px){
+  .nav-date{display:none}
+  .ch-sub{display:none}
+}
+</style>
+
+<div class="strip">
+  <div style="background:var(--y)"></div><div style="background:var(--bl)"></div><div style="background:var(--g)"></div>
+  <div style="background:var(--br)"></div><div style="background:var(--f)"></div><div style="background:var(--t)"></div>
+  <div style="background:var(--r)"></div><div style="background:var(--p)"></div><div style="background:var(--s)"></div>
+</div>
+
+<nav>
+  <div style="display:flex;align-items:center">
+    <span class="nav-m">M<span style="color:#1a1a1a!important">U</span>SIC<span style="color:#1a1a1a!important">A</span>RT</span>
+    <span class="nav-x">×</span>
+    <span class="nav-o">onda</span>
+  </div>
+  <div class="nav-date">30 Aprile · 21:30</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg">
+    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  </div>
+  <div class="hero-tag fade">International</div>
+  <div class="hero-jazz fade fade-d1"><span class="j">J</span><span class="a">A</span><span class="z1">Z</span><span class="z2">Z</span></div>
+  <div class="hero-day fade fade-d1">Day</div>
+  <div class="hero-title fade fade-d2">When You Fall in Love</div>
+  <div class="keys fade fade-d2">
+    <div class="wk" style="height:100%;background:var(--y)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--bl)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--g)"></div>
+    <div class="wk" style="height:100%;background:var(--br)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--f)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--t)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--r)"></div>
+    <div class="wk" style="height:100%;background:var(--p)"></div><div class="bk"></div>
+    <div class="wk" style="height:100%;background:var(--s)"></div>
+  </div>
+  <div class="hero-pills fade fade-d3">
+    <div class="pill">30 Aprile 2026</div>
+    <div class="pill"><span>Ore</span>21:30</div>
+    <div class="pill">Spazio Onda · San Benedetto del Tronto</div>
+  </div>
+</div>
+
+<div class="about">
+  <div class="section-tag fade">Il concerto</div>
+  <div class="about-quote fade">"Non aspettatevi una storia lineare. <em>L'amore non lo è mai.</em>"</div>
+  <div class="about-body">
+    <p class="fade">Questo concerto non racconta una storia d'amore. Racconta quello che succede <strong>quando ti innamori</strong>. Perché innamorarsi non è un sentimento ordinato. È una caduta leggera, a volte elegante, altre volte un po' storta.</p>
+    <p class="fade">Gli standard che ascolterete stasera parlano di momenti che conosciamo tutti: quando credi che sia amore… quando speri che lo diventi… quando scopri che forse era solo <strong>jazz</strong> — cioè bellissimo, ma complicato.</p>
+    <p class="fade">Questo progetto non cerca risposte. Cerca di stare in equilibrio mentre le cose cambiano tempo, tonalità e, ogni tanto, direzione.</p>
+  </div>
+  <div class="divider fade"></div>
+</div>
+
+<div class="prog">
+  <div class="prog-head">
+    <div class="section-tag fade">Il programma</div>
+    <h2 class="fade">Scaletta della serata</h2>
+  </div>
+  <div class="chapters">
+    <div class="chapter open" id="c1">
+      <button class="ch-btn" onclick="tog('c1')">
+        <span class="ch-num">I</span><div class="ch-dot" style="background:var(--y)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--y)">The First Chorus</div><div class="ch-sub">succede senza avvisare</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">Let's Fall in Love</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">All of Me</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">There Will Never Be Another You</span></li>
+      </ul></div>
+    </div>
+    <div class="chapter" id="c2">
+      <button class="ch-btn" onclick="tog('c2')">
+        <span class="ch-num">II</span><div class="ch-dot" style="background:var(--bl)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--bl)">Soft Confessions</div><div class="ch-sub">quello che si dice piano</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">But Beautiful</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">My Funny Valentine</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">If I Should Lose You</span></li>
+      </ul></div>
+    </div>
+    <div class="chapter" id="c3">
+      <button class="ch-btn" onclick="tog('c3')">
+        <span class="ch-num">III</span><div class="ch-dot" style="background:var(--t)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--t)">Midnight Distance</div><div class="ch-sub">la notte comincia qui</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">Black Coffee</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">No Moon at All</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">Isn't It Romantic</span></li>
+      </ul></div>
+    </div>
+    <div class="chapter" id="c4">
+      <button class="ch-btn" onclick="tog('c4')">
+        <span class="ch-num">IV</span><div class="ch-dot" style="background:var(--r)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--r)">The Illusion Song</div><div class="ch-sub">quello che credevamo fosse amore</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">Love for Sale</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">But Not for Me</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">Everything Happens to Me</span></li>
+      </ul></div>
+    </div>
+    <div class="chapter" id="c5">
+      <button class="ch-btn" onclick="tog('c5')">
+        <span class="ch-num">V</span><div class="ch-dot" style="background:var(--p)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--p)">If You Remember Me</div><div class="ch-sub">dopo l'amore</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--p)"></div><span class="song-name">Everytime We Say Goodbye</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--p)"></div><span class="song-name">Body and Soul</span></li>
+      </ul></div>
+    </div>
+    <div class="chapter" id="c6">
+      <button class="ch-btn" onclick="tog('c6')">
+        <span class="ch-num">VI</span><div class="ch-dot" style="background:var(--f)"></div>
+        <div class="ch-info"><div class="ch-name" style="color:var(--f)">Still Swinging</div><div class="ch-sub">niente finisce davvero</div></div>
+        <span class="ch-icon">▾</span>
+      </button>
+      <div class="ch-body"><ul class="songs">
+        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">It Had to Be You</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">I'm Beginning to See the Light</span></li>
+        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">When I Fall in Love</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<div class="info">
+  <div class="section-tag fade">Informazioni</div>
+  <div class="info-grid fade">
+    <div class="icard">
+      <div class="icard-lbl">Data</div>
+      <div class="icard-val">30 Aprile 2026</div>
+      <div class="icard-sub">International Jazz Day</div>
+    </div>
+    <div class="icard">
+      <div class="icard-lbl">Ora</div>
+      <div class="icard-val">21:30</div>
+      <div class="icard-sub">Ingresso serale</div>
+    </div>
+    <div class="icard">
+      <div class="icard-lbl">Luogo</div>
+      <div class="icard-val">Spazio Onda</div>
+      <div class="icard-sub">Via Vittorio Alfieri, 34<br>San Benedetto del Tronto (AP)</div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div style="background:var(--y)"></div><div style="background:var(--bl)"></div><div style="background:var(--g)"></div>
+  <div style="background:var(--br)"></div><div style="background:var(--f)"></div><div style="background:var(--t)"></div>
+  <div style="background:var(--r)"></div><div style="background:var(--p)"></div><div style="background:var(--s)"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <span class="footer-m">M<span style="color:#1a1a1a!important">U</span>SIC<span style="color:#1a1a1a!important">A</span>RT</span>
+    <span class="footer-x">×</span>
+    <span class="footer-o">onda</span>
+  </div>
+  <div class="footer-copy">International Jazz Day 2026 — When You Fall in Love</div>
+</footer>
+
+<script>
+function tog(id){
+  const el=document.getElementById(id);
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}})},{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
