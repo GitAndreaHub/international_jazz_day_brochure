@@ -1,11 +1,23 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
+  color-scheme: light;
   --y:#F5B731;--bl:#3B9BD5;--g:#2EA84F;--br:#8B5E3C;
   --f:#E6007E;--t:#3DBDB3;--r:#E63A2E;--p:#6B4C9E;--s:#F0A090;
   --px:clamp(16px,5vw,48px);
   --sv:clamp(64px,10vw,120px);
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f9f9f9;
+  --color-text-primary:#1a1a1a;
+  --color-text-secondary:#888888;
+  --color-border-tertiary:rgba(0,0,0,0.08);
+  --color-border-secondary:rgba(0,0,0,0.15);
+  --font-sans:system-ui,-apple-system,sans-serif;
+  --font-serif:Georgia,serif;
+  --border-radius-md:8px;
+  --border-radius-lg:12px;
 }
+html{background:#ffffff;color:#1a1a1a}
 body{font-family:var(--font-sans);background:var(--color-background-primary);overflow-x:hidden}
 .fade{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
 .fade.vis{opacity:1;transform:none}
@@ -101,7 +113,7 @@ footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:
   <div style="display:flex;align-items:center">
     <img src="logo-musicart.png" alt="MusicArt" style="height:28px;width:auto;display:block">
     <span class="nav-x">×</span>
-    <span class="nav-o">onda</span>
+    <img src="logo-onda.png" alt="onda" style="height:28px;width:auto;display:block">
   </div>
   <div class="nav-date">30 Aprile · 21:30</div>
 </nav>
@@ -254,7 +266,7 @@ footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:
   <div class="footer-brand">
     <img src="logo-musicart.png" alt="MusicArt" style="height:32px;width:auto;display:block">
     <span class="footer-x">×</span>
-    <span class="footer-o">onda</span>
+    <img src="logo-onda.png" alt="onda" style="height:32px;width:auto;display:block">
   </div>
   <div class="footer-copy">International Jazz Day 2026 — When You Fall in Love</div>
 </footer>
