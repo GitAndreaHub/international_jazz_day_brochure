@@ -1,278 +1,823 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>International Jazz Day 2026 — When You Fall in Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  color-scheme:light;
-  --y:#F5B731;--bl:#3B9BD5;--g:#2EA84F;--br:#8B5E3C;
-  --f:#E6007E;--t:#3DBDB3;--r:#E63A2E;--p:#6B4C9E;--s:#F0A090;
-  --px:clamp(20px,5vw,48px);
-  --sv:clamp(48px,8vw,100px);
-  --color-background-primary:#ffffff;
-  --color-background-secondary:#f9f9f9;
-  --color-text-primary:#1a1a1a;
-  --color-text-secondary:#888888;
-  --color-border-tertiary:rgba(0,0,0,0.08);
-  --font-sans:system-ui,-apple-system,sans-serif;
-  --font-serif:Georgia,serif;
-  --border-radius-md:8px;
-  --border-radius-lg:12px;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold:   #F5B731;
+  --pink:   #E6007E;
+  --blue:   #3B9BD5;
+  --teal:   #3DBDB3;
+  --red:    #E63A2E;
+  --purple: #6B4C9E;
+  --green:  #2EA84F;
+  --brown:  #8B5E3C;
+  --salmon: #F0A090;
+
+  --bg:     oklch(0.99 0.005 80);
+  --bg2:    oklch(0.96 0.007 75);
+  --bg3:    oklch(0.93 0.008 75);
+  --line:   oklch(0.88 0.006 75);
+  --text:   oklch(0.15 0.01 55);
+  --muted:  oklch(0.52 0.01 60);
+  --serif:  'Playfair Display', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+  --px:     clamp(24px, 6vw, 64px);
+  --sv:     clamp(60px, 10vw, 120px);
 }
-html,body{background:#fff;color:#1a1a1a;font-family:var(--font-sans);overflow-x:hidden}
 
-.fade{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
-.fade.vis{opacity:1;transform:none}
-.fade-d1{transition-delay:.1s}.fade-d2{transition-delay:.2s}.fade-d3{transition-delay:.3s}
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+}
 
-.strip{display:flex;height:6px;width:100%}
-.strip>div{flex:1}
+/* ─── FADE IN ─────────────────────────────── */
+.fade { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
+.fade.vis { opacity: 1; transform: none; }
+.fd1 { transition-delay: .1s; } .fd2 { transition-delay: .2s; } .fd3 { transition-delay: .3s; } .fd4 { transition-delay: .4s; }
 
-nav{background:#fff;border-bottom:.5px solid rgba(0,0,0,0.08);padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;height:60px}
-.nav-logos{display:flex;align-items:center;gap:10px}
-.nav-logos img{height:36px;width:auto;display:block}
-.nav-x{color:#aaa;font-size:13px}
-.nav-right img{height:36px;width:auto;display:block}
+/* ─── PIANO KEYS STRIP ────────────────────── */
+.keys {
+  display: flex;
+  height: 8px;
+  width: 100%;
+}
+.keys > span { flex: 1; }
 
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(36px,6vw,80px) var(--px) clamp(40px,6vw,80px);text-align:center;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.13}
-.orb1{width:clamp(200px,50vw,500px);height:clamp(200px,50vw,500px);background:var(--bl);top:-80px;left:-100px}
-.orb2{width:clamp(160px,40vw,400px);height:clamp(160px,40vw,400px);background:var(--f);bottom:-60px;right:-80px}
-.orb3{width:clamp(120px,30vw,300px);height:clamp(120px,30vw,300px);background:var(--y);top:40%;left:55%}
+/* ─── NAV ─────────────────────────────────── */
+nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 0 var(--px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.nav-logos { display: flex; align-items: center; gap: 12px; }
+.nav-logos img { height: 34px; width: auto; display: block; opacity: .85; }
+.nav-sep { color: var(--muted); font-size: 14px; font-weight: 300; }
+.nav-right img { height: 34px; width: auto; display: block; }
+.nav-date {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: none;
+}
+@media (min-width: 600px) { .nav-date { display: block; } }
 
-.hero-title{font-size:clamp(18px,4vw,28px);font-style:italic;font-family:var(--font-serif);color:var(--r);letter-spacing:1px;margin-bottom:clamp(28px,5vw,48px)}
+/* ─── HERO ────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 10vw, 120px) var(--px) clamp(60px, 8vw, 100px);
+  text-align: center;
+  overflow: hidden;
+}
 
-.about{padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto}
-.section-tag{font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#aaa;margin-bottom:20px}
-.about-quote{font-size:clamp(20px,4vw,36px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:#1a1a1a;line-height:1.25;margin-bottom:32px}
-.about-quote em{color:var(--f);font-style:normal}
-.about-body p{font-size:clamp(16px,2vw,18px);line-height:1.9;color:#666;margin-bottom:18px}
-.about-body strong{font-weight:500;color:#1a1a1a}
-.divider{width:48px;height:3px;border-radius:2px;margin:clamp(28px,5vw,48px) 0;background:linear-gradient(90deg,var(--f),var(--bl))}
+/* spotlight background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, oklch(0.93 0.04 80) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, oklch(0.92 0.04 310) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 25% at 80% 70%, oklch(0.93 0.035 30) 0%, transparent 60%);
+  pointer-events: none;
+}
 
-.prog{padding:0 0 var(--sv)}
-.prog-head{padding:0 var(--px) clamp(24px,4vw,56px);max-width:min(720px,100%);margin:0 auto}
-.prog-head h2{font-size:clamp(28px,6vw,52px);font-weight:500;color:#1a1a1a;margin-top:10px}
-.chapters{max-width:min(720px,100%);margin:0 auto}
-.chapter{border-top:.5px solid rgba(0,0,0,0.08)}
-.chapter:last-child{border-bottom:.5px solid rgba(0,0,0,0.08)}
-.ch-btn{display:flex;align-items:center;gap:clamp(14px,3vw,24px);padding:clamp(20px,3vw,28px) var(--px);width:100%;text-align:left;background:none;border:none;cursor:pointer;transition:background .2s}
-.ch-btn:hover{background:#f9f9f9}
-.ch-num{font-size:11px;font-weight:500;letter-spacing:2px;color:#aaa;min-width:24px;text-transform:uppercase}
-.ch-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.ch-info{flex:1;min-width:0}
-.ch-name{font-size:clamp(17px,3vw,20px);font-weight:500;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ch-sub{font-size:13px;color:#aaa;font-style:italic;margin-top:5px}
-.ch-icon{font-size:13px;color:#aaa;transition:transform .3s ease;flex-shrink:0}
-.chapter.open .ch-icon{transform:rotate(180deg)}
-.ch-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
-.chapter.open .ch-body{max-height:360px}
-.songs{list-style:none;padding:0 var(--px) 28px clamp(52px,10vw,90px)}
-.song{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:.5px solid rgba(0,0,0,0.06)}
-.song:last-child{border-bottom:none}
-.song-bar{width:3px;height:30px;border-radius:2px;flex-shrink:0}
-.song-name{font-size:clamp(13px,2vw,15px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#1a1a1a}
+/* grain texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: .6;
+  pointer-events: none;
+}
 
-footer{padding:clamp(28px,5vw,48px) var(--px) 28px;text-align:center;border-top:.5px solid rgba(0,0,0,0.08)}
-.footer-logos{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
-.footer-logos img{height:32px;width:auto;display:block}
-.footer-x{color:#aaa;font-size:12px}
-.footer-copy{font-size:12px;color:#aaa;letter-spacing:1px}
+.hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: var(--label-size, 13px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: clamp(28px, 5vw, 48px);
+  opacity: 0;
+  animation: slideUp .9s .2s forwards ease;
+}
+
+.hero-cover {
+  width: min(520px, 88vw);
+  height: auto;
+  display: block;
+  margin-bottom: clamp(36px, 6vw, 56px);
+  filter: drop-shadow(0 24px 64px oklch(0 0 0 / .6));
+  opacity: 0;
+  animation: scaleIn 1s .3s forwards cubic-bezier(.2, 0, .2, 1);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 6vw, 64px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: -.5px;
+  line-height: 1.1;
+  margin-bottom: clamp(20px, 3vw, 32px);
+  opacity: 0;
+  animation: slideUp .9s .5s forwards ease;
+}
+
+.hero-meta {
+  opacity: 0;
+  animation: slideUp .9s .7s forwards ease;
+}
+.hero-info {
+  font-size: clamp(14px, 2.2vw, 17px);
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: .5px;
+  margin-bottom: 6px;
+}
+.hero-info .dot { color: var(--gold); margin: 0 8px; }
+.hero-place {
+  font-size: clamp(12px, 1.8vw, 14px);
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s 1.4s forwards;
+  z-index: 1;
+}
+.scroll-hint span { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+.scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: lineGrow 2s 1.6s infinite ease-in-out;
+}
+
+/* ─── SECTION SHARED ──────────────────────── */
+.section { padding: var(--sv) var(--px); max-width: min(760px, 100%); margin: 0 auto; }
+.section-wide { padding: var(--sv) 0; }
+
+.label {
+  font-size: var(--label-size, 13px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+/* ─── ABOUT ───────────────────────────────── */
+.about-quote {
+  font-family: var(--serif);
+  font-size: clamp(22px, 4.5vw, 40px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 40px;
+}
+.about-quote em { color: var(--pink); font-style: normal; }
+
+.about-body p {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.95;
+  color: oklch(0.42 0.01 60);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.about-body strong { font-weight: 500; color: var(--text); }
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
+  margin: clamp(40px, 6vw, 72px) 0;
+  opacity: .4;
+}
+
+/* ─── PROGRAM ─────────────────────────────── */
+.prog-header {
+  padding: 0 var(--px) clamp(32px, 5vw, 60px);
+  max-width: min(760px, 100%);
+  margin: 0 auto;
+}
+.prog-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 7vw, 64px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.1;
+  margin-top: 12px;
+}
+
+.chapters { max-width: min(760px, 100%); margin: 0 auto; }
+
+.chapter {
+  border-top: 1px solid var(--line);
+  transition: background .25s;
+}
+.chapter:last-child { border-bottom: 1px solid var(--line); }
+
+.ch-btn {
+  display: grid;
+  grid-template-columns: 36px 14px 1fr auto;
+  align-items: center;
+  gap: clamp(12px, 2.5vw, 24px);
+  padding: clamp(20px, 3vw, 28px) var(--px);
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.ch-btn:hover { background: var(--bg2); }
+.chapter.open { background: var(--bg2); }
+
+.ch-num {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.ch-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.ch-info { min-width: 0; }
+.ch-name {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.8vw, 22px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-sub { font-size: 12px; color: var(--muted); margin-top: 5px; letter-spacing: .5px; }
+.ch-arrow {
+  width: 28px; height: 28px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), border-color .2s, background .2s;
+  color: var(--gold);
+  font-size: 10px;
+  opacity: .6;
+}
+.chapter.open .ch-arrow { transform: rotate(180deg); opacity: 1; background: var(--gold); color: #fff; border-color: var(--gold); }
+.ch-btn:hover .ch-arrow { opacity: 1; }
+
+.ch-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s cubic-bezier(.4,0,.2,1);
+}
+.chapter.open .ch-body { max-height: 400px; }
+
+.songs {
+  list-style: none;
+  padding: 4px var(--px) 32px clamp(60px, 12vw, 100px);
+}
+.song {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.song:last-child { border-bottom: none; }
+.song-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--muted);
+  min-width: 18px;
+}
+.song-name {
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* ─── BAND ────────────────────────────────── */
+.band-section { background: var(--bg2); }
+.band-inner { padding: var(--sv) var(--px); max-width: min(760px, 100%); margin: 0 auto; }
+
+.band-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.band-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(18px, 3vw, 26px) clamp(20px, 4vw, 36px);
+  border-bottom: 1px solid var(--line);
+  transition: background .2s;
+}
+.band-row:last-child { border-bottom: none; }
+.band-row:hover { background: var(--bg3); }
+
+.band-role {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.band-name {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2.5vw, 21px);
+  font-style: italic;
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* ─── CLOSING ─────────────────────────────── */
+.closing {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, oklch(0.93 0.03 80) 0%, transparent 70%);
+  pointer-events: none;
+}
+.closing-inner { position: relative; z-index: 1; padding: var(--sv) var(--px); }
+.closing-big {
+  font-family: var(--serif);
+  font-size: clamp(48px, 14vw, 120px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text);
+  line-height: .95;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+.closing-big span { color: var(--gold); }
+.closing-sub {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-style: italic;
+  color: oklch(0.55 0.01 70);
+  line-height: 1.9;
+}
+
+/* ─── SOCIAL ──────────────────────────────── */
+.social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+.social-card {
+  background: var(--bg2);
+  padding: clamp(28px, 5vw, 44px) 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: background .2s;
+}
+.social-card:hover { background: var(--bg3); }
+.social-icon { color: var(--gold); }
+.social-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.social-handle {
+  font-family: var(--serif);
+  font-size: clamp(14px, 2vw, 17px);
+  font-style: italic;
+  color: var(--text);
+}
+
+/* ─── FOOTER ──────────────────────────────── */
+footer {
+  padding: clamp(28px, 5vw, 48px) var(--px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+}
+.footer-logos { display: flex; align-items: center; gap: 14px; }
+.footer-logos img { height: 28px; width: auto; opacity: .55; }
+.footer-sep { color: var(--muted); font-size: 12px; }
+.footer-copy {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ─── KEYFRAMES ───────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lineGrow {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50%       { transform: scaleY(1.4); opacity: .4; }
+}
 </style>
+</head>
+<body>
 
-<div class="strip">
-  <div style="background:var(--y)"></div><div style="background:var(--bl)"></div><div style="background:var(--g)"></div>
-  <div style="background:var(--br)"></div><div style="background:var(--f)"></div><div style="background:var(--t)"></div>
-  <div style="background:var(--r)"></div><div style="background:var(--p)"></div><div style="background:var(--s)"></div>
+<!-- Piano keys top strip -->
+<div class="keys">
+  <span style="background:#F5B731"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#3B9BD5"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#2EA84F"></span>
+  <span style="background:#8B5E3C"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#E6007E"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#3DBDB3"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#E63A2E"></span>
+  <span style="background:#6B4C9E"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#F0A090"></span>
 </div>
 
+<!-- Nav -->
 <nav>
   <div class="nav-logos">
     <img src="logo-musicart.png" alt="MusicArt">
-    <span class="nav-x">×</span>
-    <img src="logo_onda.png" alt="Onda">
+    <span class="nav-sep">×</span>
+    <img src="logo_onda.png" alt="Spazio Onda">
   </div>
-  <div class="nav-right">
-    <img src="logo_IJD.png" alt="International Jazz Day">
-  </div>
+  <div class="nav-date">30 Aprile 2026</div>
+  <img src="logo_IJD.png" alt="International Jazz Day" style="height:34px;width:auto;">
 </nav>
 
-<div class="hero">
-  <div class="hero-bg">
-    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <img src="copertina.png" alt="When You Fall in Love" class="hero-cover">
+    <div class="hero-title">When You Fall in Love</div>
+    <div class="hero-meta">
+      <div class="hero-info">
+        30 Aprile<span class="dot">·</span>ore 21:30<span class="dot">·</span>Spazio Onda
+      </div>
+      <div class="hero-place">Via Vittorio Alfieri, 34 &nbsp;·&nbsp; San Benedetto del Tronto</div>
+    </div>
   </div>
-  <img src="copertina.png" alt="International Jazz Day" class="fade" style="width:min(480px,88%);height:auto;margin-bottom:clamp(16px,4vw,28px)">
-  <div class="hero-title fade fade-d1">When You Fall in Love</div>
-  <div class="fade fade-d2" style="text-align:center;line-height:2">
-    <div style="font-size:clamp(15px,2.5vw,18px);font-weight:500;color:#1a1a1a">30 Aprile &nbsp;·&nbsp; ore 21:30 &nbsp;·&nbsp; Spazio Onda</div>
-    <div style="font-size:clamp(13px,2vw,15px);color:#aaa;margin-top:4px">Via Vittorio Alfieri, 34 · San Benedetto del Tronto</div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scopri</span>
   </div>
-</div>
+</section>
 
-<div class="about">
-  <div class="section-tag fade">Il concerto</div>
-  <div class="about-quote fade">"Non aspettatevi una storia lineare. <em>L'amore non lo è mai.</em>"</div>
+<!-- About -->
+<div class="section">
+  <div class="label fade">Il concerto</div>
+  <div class="about-quote fade">"Non aspettatevi una storia lineare.<br><em>L'amore non lo è mai.</em>"</div>
   <div class="about-body">
     <p class="fade">Questo concerto non racconta una storia d'amore. Racconta quello che succede <strong>quando ti innamori</strong>. Perché innamorarsi non è un sentimento ordinato. È una caduta leggera, a volte elegante, altre volte un po' storta.</p>
     <p class="fade">Gli standard che ascolterete stasera parlano di momenti che conosciamo tutti: quando credi che sia amore… quando speri che lo diventi… quando scopri che forse era solo <strong>jazz</strong> — cioè bellissimo, ma complicato.</p>
     <p class="fade">Questo progetto non cerca risposte. Cerca di stare in equilibrio mentre le cose cambiano tempo, tonalità e, ogni tanto, direzione.</p>
   </div>
-  <div class="divider fade"></div>
+  <div class="rule fade"></div>
 </div>
 
-<div class="prog">
-  <div class="prog-head">
-    <div class="section-tag fade">Il programma</div>
-    <h2 class="fade">Scaletta della serata</h2>
+<!-- Program -->
+<div class="section-wide">
+  <div class="prog-header">
+    <div class="label fade">Il programma</div>
+    <h2 class="fade">Scaletta<br>della serata</h2>
+    <p class="fade" style="font-size:13px;color:var(--muted);letter-spacing:.5px;margin-top:16px;display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:20px;height:20px;border:1px solid var(--muted);border-radius:50%;text-align:center;line-height:18px;font-size:9px;">▾</span>
+      Tocca un capitolo per vedere i brani
+    </p>
   </div>
+
   <div class="chapters">
-    <div class="chapter open" id="c1">
+
+    <div class="chapter open fade" id="c1">
       <button class="ch-btn" onclick="tog('c1')">
-        <span class="ch-num">I</span><div class="ch-dot" style="background:var(--y)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--y)">The First Chorus</div><div class="ch-sub">succede senza avvisare</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">I</span>
+        <div class="ch-dot" style="background:#F5B731"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#F5B731">The First Chorus</div>
+          <div class="ch-sub">succede senza avvisare</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">Let's Fall in Love</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">All of Me</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--y)"></div><span class="song-name">There Will Never Be Another You</span></li>
-      </ul></div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">Let's Fall in Love</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">All of Me</span></li>
+          <li class="song"><span class="song-num">3.</span><span class="song-name">There Will Never Be Another You</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="chapter" id="c2">
+
+    <div class="chapter fade" id="c2">
       <button class="ch-btn" onclick="tog('c2')">
-        <span class="ch-num">II</span><div class="ch-dot" style="background:var(--bl)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--bl)">Soft Confessions</div><div class="ch-sub">quello che si dice piano</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">II</span>
+        <div class="ch-dot" style="background:#3B9BD5"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#3B9BD5">Soft Confessions</div>
+          <div class="ch-sub">quello che si dice piano</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">But Beautiful</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">My Funny Valentine</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--bl)"></div><span class="song-name">If I Should Lose You</span></li>
-      </ul></div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">But Beautiful</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">My Funny Valentine</span></li>
+          <li class="song"><span class="song-num">3.</span><span class="song-name">If I Should Lose You</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="chapter" id="c3">
+
+    <div class="chapter fade" id="c3">
       <button class="ch-btn" onclick="tog('c3')">
-        <span class="ch-num">III</span><div class="ch-dot" style="background:var(--t)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--t)">Midnight Distance</div><div class="ch-sub">la notte comincia qui</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">III</span>
+        <div class="ch-dot" style="background:#3DBDB3"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#3DBDB3">Midnight Distance</div>
+          <div class="ch-sub">la notte comincia qui</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">Black Coffee</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">No Moon at All</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--t)"></div><span class="song-name">Isn't It Romantic</span></li>
-      </ul></div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">Black Coffee</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">No Moon at All</span></li>
+          <li class="song"><span class="song-num">3.</span><span class="song-name">Isn't It Romantic</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="chapter" id="c4">
+
+    <div class="chapter fade" id="c4">
       <button class="ch-btn" onclick="tog('c4')">
-        <span class="ch-num">IV</span><div class="ch-dot" style="background:var(--r)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--r)">The Illusion Song</div><div class="ch-sub">quello che credevamo fosse amore</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">IV</span>
+        <div class="ch-dot" style="background:#E63A2E"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#E63A2E">The Illusion Song</div>
+          <div class="ch-sub">quello che credevamo fosse amore</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">Love for Sale</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">But Not for Me</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--r)"></div><span class="song-name">Everything Happens to Me</span></li>
-      </ul></div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">Love for Sale</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">But Not for Me</span></li>
+          <li class="song"><span class="song-num">3.</span><span class="song-name">Everything Happens to Me</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="chapter" id="c5">
+
+    <div class="chapter fade" id="c5">
       <button class="ch-btn" onclick="tog('c5')">
-        <span class="ch-num">V</span><div class="ch-dot" style="background:var(--p)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--p)">If You Remember Me</div><div class="ch-sub">dopo l'amore</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">V</span>
+        <div class="ch-dot" style="background:#6B4C9E"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#6B4C9E">If You Remember Me</div>
+          <div class="ch-sub">dopo l'amore</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--p)"></div><span class="song-name">Everytime We Say Goodbye</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--p)"></div><span class="song-name">Body and Soul</span></li>
-      </ul></div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">Everytime We Say Goodbye</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">Body and Soul</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="chapter" id="c6">
+
+    <div class="chapter fade" id="c6">
       <button class="ch-btn" onclick="tog('c6')">
-        <span class="ch-num">VI</span><div class="ch-dot" style="background:var(--f)"></div>
-        <div class="ch-info"><div class="ch-name" style="color:var(--f)">Still Swinging</div><div class="ch-sub">niente finisce davvero</div></div>
-        <span class="ch-icon">▾</span>
+        <span class="ch-num">VI</span>
+        <div class="ch-dot" style="background:#E6007E"></div>
+        <div class="ch-info">
+          <div class="ch-name" style="color:#E6007E">Still Swinging</div>
+          <div class="ch-sub">niente finisce davvero</div>
+        </div>
+        <div class="ch-arrow">▾</div>
       </button>
-      <div class="ch-body"><ul class="songs">
-        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">It Had to Be You</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">I'm Beginning to See the Light</span></li>
-        <li class="song"><div class="song-bar" style="background:var(--f)"></div><span class="song-name">When I Fall in Love</span></li>
-      </ul></div>
-    </div>
-  </div>
-</div>
-
-<div style="padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto">
-  <div class="section-tag fade" style="margin-bottom:32px">La formazione</div>
-  <div class="fade" style="display:flex;flex-direction:column;gap:0;border:.5px solid rgba(0,0,0,0.08);border-radius:var(--border-radius-lg);overflow:hidden">
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:.5px solid rgba(0,0,0,0.06)">
-      <span style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#aaa">Voce</span>
-      <span style="font-size:17px;font-weight:500;color:#1a1a1a;font-family:var(--font-serif);font-style:italic">Antonia De Angelis</span>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:.5px solid rgba(0,0,0,0.06)">
-      <span style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#aaa">Chitarra</span>
-      <span style="font-size:17px;font-weight:500;color:#1a1a1a;font-family:var(--font-serif);font-style:italic">Giuseppe Marconi</span>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:.5px solid rgba(0,0,0,0.06)">
-      <span style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#aaa">Basso</span>
-      <span style="font-size:17px;font-weight:500;color:#1a1a1a;font-family:var(--font-serif);font-style:italic">Luca Brunetti</span>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px">
-      <span style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#aaa">Batteria</span>
-      <span style="font-size:17px;font-weight:500;color:#1a1a1a;font-family:var(--font-serif);font-style:italic">Andrea Tassi</span>
-    </div>
-  </div>
-</div>
-
-<div style="padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto;text-align:center" class="fade">
-  <div class="section-tag" style="margin-bottom:24px">Una serata speciale</div>
-  <div style="font-size:clamp(40px,10vw,80px);font-weight:500;font-style:italic;font-family:var(--font-serif);color:#1a1a1a;line-height:1.1;margin-bottom:20px">Grazie a tutti.</div>
-  <div style="font-size:clamp(15px,2vw,18px);color:#aaa;font-style:italic;font-family:var(--font-serif);line-height:1.8">Perché senza di voi,<br>la musica sarebbe solo silenzio.</div>
-</div>
-
-<div style="padding:var(--sv) var(--px);max-width:min(720px,100%);margin:0 auto">
-  <div class="section-tag fade" style="text-align:center;margin-bottom:36px">Seguici</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(0,0,0,0.08);border:.5px solid rgba(0,0,0,0.08);border-radius:var(--border-radius-lg);overflow:hidden" class="fade">
-    <a href="https://www.instagram.com/musicart_sbt/" target="_blank" style="background:#fff;padding:32px 20px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E6007E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#E6007E" stroke="none"/></svg>
-      <div style="text-align:center">
-        <div style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">MusicArt</div>
-        <div style="font-size:15px;font-weight:500;color:#1a1a1a">@musicart_sbt</div>
+      <div class="ch-body">
+        <ul class="songs">
+          <li class="song"><span class="song-num">1.</span><span class="song-name">It Had to Be You</span></li>
+          <li class="song"><span class="song-num">2.</span><span class="song-name">I'm Beginning to See the Light</span></li>
+          <li class="song"><span class="song-num">3.</span><span class="song-name">When I Fall in Love</span></li>
+        </ul>
       </div>
-    </a>
-    <a href="https://www.instagram.com/spazio_onda/" target="_blank" style="background:#fff;padding:32px 20px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px" onmouseover="this.style.background='#f9f9f9'" onmouseout="this.style.background='#fff'">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8B5E3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#8B5E3C" stroke="none"/></svg>
-      <div style="text-align:center">
-        <div style="font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">Spazio Onda</div>
-        <div style="font-size:15px;font-weight:500;color:#1a1a1a">@spazio_onda</div>
+    </div>
+
+  </div><!-- /chapters -->
+</div><!-- /section-wide -->
+
+<!-- Band -->
+<div class="band-section">
+  <div class="band-inner">
+    <div class="label fade">La formazione</div>
+    <div class="band-grid fade fd1">
+      <div class="band-row">
+        <span class="band-role">Voce</span>
+        <span class="band-name">Antonia De Angelis</span>
       </div>
-    </a>
+      <div class="band-row">
+        <span class="band-role">Chitarra</span>
+        <span class="band-name">Giuseppe Marconi</span>
+      </div>
+      <div class="band-row">
+        <span class="band-role">Basso</span>
+        <span class="band-name">Luca Brunetti</span>
+      </div>
+      <div class="band-row">
+        <span class="band-role">Batteria</span>
+        <span class="band-name">Andrea Tassi</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="strip">
-  <div style="background:var(--y)"></div><div style="background:var(--bl)"></div><div style="background:var(--g)"></div>
-  <div style="background:var(--br)"></div><div style="background:var(--f)"></div><div style="background:var(--t)"></div>
-  <div style="background:var(--r)"></div><div style="background:var(--p)"></div><div style="background:var(--s)"></div>
+<!-- Closing -->
+<div class="closing fade">
+  <div class="closing-inner">
+    <div class="label" style="justify-content:center;display:flex;margin-bottom:32px">Una serata speciale</div>
+    <div class="closing-big">Grazie<br>a <span>tutti.</span></div>
+    <div class="closing-sub">
+      Perché senza di voi,<br>la musica sarebbe solo silenzio.
+    </div>
+
+    <!-- Social -->
+    <div class="social-grid" style="max-width:min(520px,100%);margin:48px auto 0;">
+      <a href="https://www.instagram.com/musicart_sbt/" target="_blank" class="social-card">
+        <svg class="social-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <circle cx="12" cy="12" r="4.5"></circle>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+        </svg>
+        <div>
+          <div class="social-label">MusicArt</div>
+          <div class="social-handle">@musicart_sbt</div>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/spazio_onda/" target="_blank" class="social-card">
+        <svg class="social-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <circle cx="12" cy="12" r="4.5"></circle>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+        </svg>
+        <div>
+          <div class="social-label">Spazio Onda</div>
+          <div class="social-handle">@spazio_onda</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Piano keys bottom strip -->
+<div class="keys">
+  <span style="background:#F5B731"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#3B9BD5"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#2EA84F"></span>
+  <span style="background:#8B5E3C"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#E6007E"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#3DBDB3"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#E63A2E"></span>
+  <span style="background:#6B4C9E"></span>
+  <span style="background:#1a1a1a"></span>
+  <span style="background:#F0A090"></span>
 </div>
 
 <footer>
   <div class="footer-logos">
     <img src="logo-musicart.png" alt="MusicArt">
-    <span class="footer-x">×</span>
-    <img src="logo_onda.png" alt="Onda">
+    <span class="footer-sep">×</span>
+    <img src="logo_onda.png" alt="Spazio Onda">
   </div>
   <div class="footer-copy">International Jazz Day 2026 — When You Fall in Love</div>
 </footer>
 
-<script>
-if(!document.querySelector('meta[name="viewport"]')){
-  const m=document.createElement('meta');
-  m.name='viewport';m.content='width=device-width,initial-scale=1';
-  document.head.appendChild(m);
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "labelSize": 13,
+  "labelColor": "#F5B731"
+}/*EDITMODE-END*/;
+
+function TweaksApp() {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--label-size', tweaks.labelSize + 'px');
+    document.documentElement.style.setProperty('--gold', tweaks.labelColor);
+  }, [tweaks.labelSize, tweaks.labelColor]);
+
+  return (
+    <TweaksPanel>
+      <TweakSection title="Etichette">
+        <TweakSlider label="Dimensione testo" id="labelSize" min={9} max={20} step={1} />
+        <TweakColor label="Colore" id="labelColor" />
+      </TweakSection>
+    </TweaksPanel>
+  );
 }
-function tog(id){
-  const el=document.getElementById(id);
-  const was=el.classList.contains('open');
-  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('open'));
-  if(!was)el.classList.add('open');
-}
-const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}})},{threshold:.1});
-document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<TweaksApp />);
 </script>
+
+<div id="tweaks-root"></div>
+
+<script>
+function tog(id) {
+  const el = document.getElementById(id);
+  const was = el.classList.contains('open');
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('open'));
+  if (!was) el.classList.add('open');
+}
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(x => {
+    if (x.isIntersecting) { x.target.classList.add('vis'); io.unobserve(x.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
